@@ -1,7 +1,4 @@
 class A {
-  B: B[];
-  Name: string;
-
   constructor() {
     this.B = [new B(this)];
     this.Name = 'object A';
@@ -9,26 +6,21 @@ class A {
 }
 
 class B {
-  A: A;
-  Name: string;
-
-  constructor(a: A) {
+  constructor(a) {
     this.A = a;
     this.Name = 'object B';
   }
 
   toJSON() {
-    let thisCopy = Cypress._.cloneDeep(this);
+    var thisCopy = Cypress._.cloneDeep(this);
     thisCopy.A = undefined;
     return thisCopy;
   }
 }
 
 describe('page', () => {
-  let obj = {
-    As: [
-      new A()
-    ]
+  var obj = {
+    A: new A()
   }
 
   before(() => {
